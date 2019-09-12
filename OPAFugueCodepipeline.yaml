@@ -129,7 +129,9 @@ Resources:
                                 Category: Approval
                                 Owner: AWS
                                 Version: 1
-                                Provider: Manual               
+                                Provider: Manual
+                            Configuration:
+                                CustomData: "Manually check and validate the Terraform Plan resources!"
                 -
                     Name: TerraformApply
                     Actions:
@@ -147,7 +149,7 @@ Resources:
                                 - Name: Deployment
                             Configuration:
                                 ProjectName: !Ref TerraformApply
-                                
+
     CodeBuild:
         Type: AWS::CodeBuild::Project
         Properties:
@@ -190,7 +192,7 @@ Resources:
                                 # Parameters for Policy
                                 ########################
                                 ########################
-                                # 1) No ingress port other than 443 open to internet
+                                # 1) No internet ingress port other than 22, 80 and 443
                                 # 2) All EBS volumes must be encrypted
                                 # 3) Only available region is US-east-1
                                 # 4) t2.micro-2xLarge
@@ -262,7 +264,9 @@ Resources:
                                 resources_tagged {
                                   resource = terraform_objects["planned_values"]["root_module"]["resources"][_]
                                   # resource["values"]["tags"][_] == "sg-1-int-pa-awg"
-                                  resource["values"]["tags"] == null
+                                  # resource["values"]["tags"] == null
+                                  test = resource["values"]["tags"]
+                                  count(test) == 0
                                 }
 
                                 ####################
@@ -333,7 +337,7 @@ Resources:
                               - Fugue_scan_id=$(jq -r '.id' <<< "$content")
                               - echo $Fugue_scan_id
                               - echo -e "\nFugue re-baselined, turn on Fugue scanning. No enforcement.\n"
-                              - str="does not belong to environment"
+                              - str="IN_PROGRESS"
                               - >-
                                 while [[ `curl -X PATCH "https://api.riskmanager.fugue.co/v0/environments/${Fugueenvironmentid}" -u ${FugueCLIENTID}:${FugueCLIENTSECRET} -d '{"baseline_id": "'$Fugue_scan_id'","scan_interval": "'$Intervalinseconds'","remediation": false}' -s` == *$str* ]]; do echo -e "Waiting for Fugue scan to finsh....\n"; sleep 5; done
                               - echo -e "\nFugue environment re-baselined and drift detection enabled!"
