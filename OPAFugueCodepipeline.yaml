@@ -264,9 +264,9 @@ Resources:
                                 resources_tagged {
                                   resource = terraform_objects["planned_values"]["root_module"]["resources"][_]
                                   # resource["values"]["tags"][_] == "sg-1-int-pa-awg"
-                                  # resource["values"]["tags"] == null
-                                  test = resource["values"]["tags"]
-                                  count(test) == 0
+                                  resource["values"]["tags"] == null
+                                  # test = resource["values"]["tags"]
+                                  # count(test) == 0
                                 }
 
                                 ####################
