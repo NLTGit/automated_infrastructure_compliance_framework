@@ -17,3 +17,4 @@ aws cloudformation create-stack --stack-name testforcarl --template-body file://
 
 curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.13.3/opa_linux_amd64 && chmod +x opa && mv opa /usr/bin
 
+
