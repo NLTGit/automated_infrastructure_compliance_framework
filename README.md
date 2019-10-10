@@ -1,3 +1,29 @@
+Title: Automated Infrastructure Compliance Framework 
+Link to automated deployment of the stack: https://aicf.nltmso.com
+Summary: Write a summary here
+Contacts:
+
+##Menu-
+*What is AICF?
+*How can it help?
+*Technical design/specs
+*How to deploy AICF
+**https://aicf.nltmso.com
+**Console
+**CLI
+*How to run AICF
+
+
+
+
+
+
+
+
+
+
+
+
 # OPAFugeCodePipeline
 Integration of OPA, codepipeline deployment and Fugue baseline/drift detection
  
