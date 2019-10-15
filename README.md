@@ -1,7 +1,5 @@
-Title: Automated Infrastructure Compliance Framework 
-Link to automated deployment of the stack: https://aicf.nltmso.com
-Summary: Write a summary here
-Contacts:
+# Automated Infrastructure Compliance Framework 
+Contacts: for help, email support@nltgis.com
 
 ##Menu-
 *What is AICF?
