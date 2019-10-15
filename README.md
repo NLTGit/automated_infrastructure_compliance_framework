@@ -1,13 +1,13 @@
 # Automated Infrastructure Compliance Framework 
 For help, email support@nltgis.com
 
-###What is AICF?
+### What is AICF?
 The Automated Infrastructure Compliance Framework is an open-source integrated pipeline for deploying and monitoring infrastructure.  Specific features include:
 * Pre-deployment policy checking using Open Policy Agent
 * Post-deployment AWS/Azure drift detection using Fugue.co
 * Terraform for Infrastructure-as-Code deployments
 
-###Technical Summary
+### Technical Summary
 AICF is built on AWS Codepipeline and AWS Codebuild and integrates Open Policy Agent, Terraform, and Fugue.
 
 ###Deployment/installation overview
