@@ -1,2 +1,3 @@
 *configuration.json
 *.DS_Store
+.terraform/

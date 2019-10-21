@@ -149,6 +149,36 @@ Resources:
                                 - Name: Deployment
                             Configuration:
                                 ProjectName: !Ref TerraformApply
+                -
+                    Name: TerraformDestroyManualCheck
+                    Actions:
+                        -
+                            Name: ManualApproval
+                            RunOrder: 1
+                            ActionTypeId:
+                                Category: Approval
+                                Owner: AWS
+                                Version: 1
+                                Provider: Manual
+                            Configuration:
+                                CustomData: "Infrastructure tear down manual approval!!"
+                -
+                    Name: TerraformDestroy
+                    Actions:
+                        -
+                            Name: Destroy
+                            RunOrder: 1
+                            InputArtifacts:
+                                - Name: Source
+                            ActionTypeId:
+                                Category: Build
+                                Owner: AWS
+                                Version: 1
+                                Provider: CodeBuild
+                            OutputArtifacts:
+                                - Name: Destory
+                            Configuration:
+                                ProjectName: !Ref TerraformDestroy
 
     CodeBuild:
         Type: AWS::CodeBuild::Project
@@ -180,7 +210,7 @@ Resources:
                               - cd $source
                               - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
-                              - terraform init -no-color && terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color >> tfplan.json
+                              - terraform init -no-color &&   && terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color >> tfplan.json
                               - curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.13.3/opa_linux_amd64 && chmod +x opa && mv opa /usr/bin
                               - |
                                 cat <<EOF > terraform.rego
@@ -292,7 +322,7 @@ Resources:
                               - evaluate=$(opa eval --format=pretty --data terraform.rego --input tfplan.json "data.terraform.analysis.authz") && echo $evaluate
                               - if [ $evaluate == 'true' ]; then echo -e "\nTerraform resources plan PASSES OPA authorization!\n" && exit 0; else echo -e "\n!!! Terraform resources plan FAILS OPA authorization !!!\n" && exit 1; fi
                 InsecureSsl: false
-                Location: https://github.com/alleynec/pavisual
+                Location: https://github.com/NLTGit/automated_infrastructure_compliance_framework
                 GitCloneDepth: 1
                 Type: GITHUB
                 ReportBuildStatus: true
@@ -350,7 +380,56 @@ Resources:
                                 while [[ $content == *$str* ]]; do echo -e "Waiting for Fugue scan to finsh....\n"; content=$(curl -X PATCH "https://api.riskmanager.fugue.co/v0/environments/${Fugueenvironmentid}" -u ${FugueCLIENTID}:${FugueCLIENTSECRET} -d '{"baseline_id": "'$Fugue_scan_id'","scan_interval": "'$Interval'","remediation": false}'); echo -e "\n$content\n"; sleep 5; done
                               - echo -e "\nFugue environment re-baselined, no baseline enforcement and drift detection enabled!"
                 InsecureSsl: false
-                Location: https://github.com/alleynec/pavisual
+                Location: https://github.com/NLTGit/automated_infrastructure_compliance_framework
+                GitCloneDepth: 1
+                Type: GITHUB
+                ReportBuildStatus: true
+
+    TerraformDestroy:
+        Type: AWS::CodeBuild::Project
+        Properties:
+            Name: TerraformDestroy
+            Description: !Sub Build project for ${ApplicationName}
+            ServiceRole: !Ref CodeBuildRole
+            Cache:
+              Type: NO_CACHE
+            Environment:
+                ComputeType: BUILD_GENERAL1_MEDIUM
+                Image: aws/codebuild/amazonlinux2-x86_64-standard:1.0
+                Type: LINUX_CONTAINER
+                EnvironmentVariables: [
+                    {
+                      "Name" : Interval,
+                      "Type" : PLAINTEXT,
+                      "Value" : !Ref Intervalinseconds
+                    }
+                ]
+            Artifacts:
+                Type: NO_ARTIFACTS
+            Source:
+                BuildSpec: !Sub |-
+                        version: 0.2
+
+                        phases:
+                          install:
+                            runtime-versions:
+                              docker: 18
+                            commands:
+                              - source=`pwd`
+                              - cd /tmp && curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TerraformVersion}/terraform_${TerraformVersion}_linux_amd64.zip && echo "${TerraformSha256} terraform.zip" | sha256sum -c --quiet && unzip terraform.zip && mv terraform /usr/bin
+                          build:
+                            commands:
+                              - cd $source
+                              - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
+                              - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
+                              - echo -e "\nTurn off Fugue drift detection.\n"
+                              - >-
+                                curl -X PATCH "https://api.riskmanager.fugue.co/v0/environments/${Fugueenvironmentid}" -u ${FugueCLIENTID}:${FugueCLIENTSECRET} -d '{"baseline_id": "","remediation": false}' && sleep 10
+                              - terraform init -no-color
+                              - terraform destroy -auto-approve -no-color
+                              - echo -e "\nFugue re-baseline to a null scan and terraform environment destroyed!!.\n"
+                InsecureSsl: false
+                Location: https://github.com/NLTGit/automated_infrastructure_compliance_framework
                 GitCloneDepth: 1
                 Type: GITHUB
                 ReportBuildStatus: true
