@@ -47,7 +47,7 @@ $ aws cloudformation create-stack --stack-name testStack --template-body file://
 
 4) Complete Steps 6 & 7 in the **Console section described below
   
-**Console method**  
+**Manual Method Using the AWS Console**  
 1) Log onto the your AWS web console
   
 2) Navigate to the AWS cloudformation service page:
@@ -56,7 +56,7 @@ $ aws cloudformation create-stack --stack-name testStack --template-body file://
 3) Click on "Create Stack"
 <img src="images/Screen Shot 2019-10-15 at 8.43.36 AM.png">
   
-4) Ensure "Template is Ready" and "Upload a template file" are chosen. Choose the cloudformation template file in this repository
+4) Ensure "Template is Ready" and "Upload a template file" are chosen. Choose the cloudformation template file (OPAFugueCodepipeline.yaml) in this repository
 <img src="images/Screen Shot 2019-10-15 at 8.44.58 AM.png">
   
 5) Fill in the parameters with the information gathered in Deployment/installation overview and click next
@@ -68,7 +68,7 @@ $ aws cloudformation create-stack --stack-name testStack --template-body file://
 
 
 ## How to run AICF
-The first run will initiate itself once the AWS cloudformation stack is created. By default, the AWS pipeline is configured to run manually. In order to run, execute the following steps:
+Once you deplopy the AICF, it is ready to be usedThe first run will initiate itself once the AWS cloudformation stack is created. By default, the AWS pipeline is configured to run manually. In order to run, execute the following steps:
 
 <img src="images/Screen Shot 2019-10-15 at 8.31.10 AM.png">
 
