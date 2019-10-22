@@ -41,7 +41,7 @@ $ aws cloudformation create-stack --stack-name testStack --template-body file://
 **Accelerated CloudFormation method**  
 1) Login to the AWS account you wish to deploy the AICF 
 
-2) Click [here to deploy the AICF Cloudformation stack to your account.] (https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?AICFCodepipelineStack&templateURL=https://s3.amazonaws.com/automated-infrastructure-compliance-framework/OPAFugueCodepipeline.yaml)  
+2) Click [here to deploy the AICF Cloudformation stack to your account.](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?AICFCodepipelineStack&templateURL=https://s3.amazonaws.com/automated-infrastructure-compliance-framework/OPAFugueCodepipeline.yaml)  
 
 3) Click "Next", give your new stack a name and then fill in the variable parameters that are required to deploy the pipeline.
 
