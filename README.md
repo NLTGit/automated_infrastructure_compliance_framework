@@ -38,16 +38,14 @@ In order to deployment AICF via bash CLI environment, one must first have the aw
 $ aws cloudformation create-stack --stack-name testStack --template-body file://OPACodepipelineFugue.yaml --parameters file://OPACodepipelineFugue-configuration.json
 ```  
 
-**https://aicf.nltmso.com method**  
-1) Log into Fugue.co and click on "DEFINE NEW ENVIRONMENT"
-<img src="images/Screen Shot 2019-10-15 at 8.53.26 AM.png">
+**Accelerated CloudFormation method**  
+1) Login to the AWS account you wish to deploy the AICF 
 
-2) Enter a name for the Fuge environment, the AWS cloud provider and click "CONTINUE"
+2) Click [here to deploy the AICF Cloudformation stack to your account.] (https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?AICFCodepipelineStack&templateURL=https://s3.amazonaws.com/automated-infrastructure-compliance-framework/OPAFugueCodepipeline.yaml)  
 
-3) Scroll to the bottom of the page and click "LAUNCH STACK IN AWS CONSOLE"
-<img src="images/Screen Shot 2019-10-15 at 8.56.55 AM.png">
+3) Click "Next", give your new stack a name and then fill in the variable parameters that are required to deploy the pipeline.
 
-4) Complete Steps 4-7 in the **Console section described below
+4) Complete Steps 6 & 7 in the **Console section described below
   
 **Console method**  
 1) Log onto the your AWS web console
