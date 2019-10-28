@@ -250,7 +250,7 @@ Resources:
                                     terraform_objects["configuration"]["provider_config"][_]["expressions"]["region"]["constant_value"] == regions[_]
                                     not incorrect_ec2
                                     not incorrect_security_groups
-                                #    not resources_tagged
+                                    not resources_tagged
                                 }
 
                                 # Whether there is any change to IAM

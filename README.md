@@ -35,13 +35,13 @@ In order to deployment AICF via bash CLI environment, one must first have the aw
 2) Run the command below, subsituting the name "testStack" with one of your choosing.
 
 ```sh
-$ aws cloudformation create-stack --stack-name testStack --template-body file://OPACodepipelineFugue.yaml --parameters file://OPACodepipelineFugue-configuration.json
+$ aws cloudformation create-stack --stack-name testStack --template-body file://aicf.yaml --parameters file://aicf-configuration.json --capabilities CAPABILITY_NAMED_IAM
 ```  
 
 **Accelerated CloudFormation method**  
 1) Login to the AWS account you wish to deploy the AICF 
 
-2) Click [here to deploy the AICF Cloudformation stack to your account.](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?AICFCodepipelineStack&templateURL=https://s3.amazonaws.com/automated-infrastructure-compliance-framework/OPAFugueCodepipeline.yaml)  
+2) Click [here to deploy the AICF Cloudformation stack to your account.](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?AICFCodepipelineStack&templateURL=https://s3.amazonaws.com/automated-infrastructure-compliance-framework/aicf.yaml)  
 
 3) Click "Next", give your new stack a name and then fill in the variable parameters that are required to deploy the pipeline.
 
@@ -98,7 +98,7 @@ $ terraform destroy -auto-approve
 
 _Delete Stack_
 ```sh
-$ aws cloudformation delete-stack --stack-name testforcarl --profile e3_sandbox
+$ aws cloudformation delete-stack --stack-name testStack --profile e3_sandbox
 ```  
 _Install OPA binary locally_
 ```sh
