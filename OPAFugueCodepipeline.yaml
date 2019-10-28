@@ -210,7 +210,8 @@ Resources:
                               - cd $source
                               - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
-                              - terraform init -no-color &&   && terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color >> tfplan.json
+                              - terraform init -no-color && terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color >> tfplan.json
+                              - # terraform init -no-color && terraform output -json
                               - curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.13.3/opa_linux_amd64 && chmod +x opa && mv opa /usr/bin
                               - |
                                 cat <<EOF > terraform.rego
@@ -249,7 +250,7 @@ Resources:
                                     terraform_objects["configuration"]["provider_config"][_]["expressions"]["region"]["constant_value"] == regions[_]
                                     not incorrect_ec2
                                     not incorrect_security_groups
-                                    not resources_tagged
+                                #    not resources_tagged
                                 }
 
                                 # Whether there is any change to IAM
