@@ -320,8 +320,8 @@ Resources:
                                     name != "destroy"
                                 }
                                 EOF
-                              - evaluate=$(opa eval --format=pretty --data terraform.rego --input tfplan.json "data.terraform.analysis.authz") && echo $evaluate
-                              - if [ $evaluate == 'true' ]; then echo -e "\nTerraform resources plan PASSES OPA authorization!\n" && exit 0; else echo -e "\n!!! Terraform resources plan FAILS OPA authorization !!!\n" && exit 1; fi
+                              - evaluate=$(opa eval --format=pretty --data terraform.rego --input tfplan.json "data.terraform.analysis.authz" --explain fails) && echo $evaluate
+                              - if echo "$evaluate" | grep -q "true"; then echo -e "\nTerraform resources plan PASSES OPA authorization!\n" && exit 0; else echo -e "\n!!! Terraform resources plan FAILS OPA authorization !!!\n" && exit 1; fi
                 InsecureSsl: false
                 Location: https://github.com/NLTGit/automated_infrastructure_compliance_framework
                 GitCloneDepth: 1
