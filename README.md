@@ -104,3 +104,13 @@ _Install OPA binary locally_
 ```sh
 curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.13.3/opa_linux_amd64 && chmod +x opa && mv opa /usr/bin
 ```  
+
+## Contributing
+1) Clone repo  
+2) Create new branch, make changes and commit and push to remote i.e. `git push --set-upstream origin new-branch`  
+3) Log into github and create pull request  
+
+## Contact  
+New Light Technologies, Inc.   
+Dave Williams - dave.williams.nltgis.com  
+Carl Alleyne - carl.alleyne@nltgis.com  
