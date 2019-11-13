@@ -108,7 +108,7 @@ curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.13.
 ## Contributing
 1) Clone repo  
 2) Create new branch, make changes and commit and push to remote i.e. `git push --set-upstream origin new-branch`  
-3) Log into github and create pull request  
+3) Log into github and create pull request to the master branch
 
 ## Contact  
 New Light Technologies, Inc.   
