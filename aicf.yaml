@@ -120,19 +120,6 @@ Resources:
                             Configuration:
                                 ProjectName: !Ref CodeBuild
                 -
-                    Name: CheckTerraformPlan
-                    Actions:
-                        -
-                            Name: ManualApproval
-                            RunOrder: 1
-                            ActionTypeId:
-                                Category: Approval
-                                Owner: AWS
-                                Version: 1
-                                Provider: Manual
-                            Configuration:
-                                CustomData: "Manually check and validate the Terraform Plan resources!"
-                -
                     Name: TerraformApply
                     Actions:
                         -
