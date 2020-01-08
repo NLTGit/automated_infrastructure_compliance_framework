@@ -1,11 +1,8 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: >
-    This CloudFormation template will deploy a full CI/CD pipeline for the FEMA public
-    assistance visualization tool. It includes building with AWS CodeBuild and 
-    infrastructure deployment. It will create an AWS CodePipeline for 
-    orchastrating builds, testing and deployments as well initiating a ECS 
-    fargate service to host the pa visualization tool docker microservice containers 
-    in the lab environment.
+    This CloudFormation template will deploy a full CI/CD pipeline for the Automated 
+    infrastructure Compliance Framework. It includes building with AWS CodeBuild modules 
+    for the various stages of the framework.
 
 Parameters:
 
@@ -365,7 +362,7 @@ Resources:
                               - str="does not belong to environment"
                               - content="does not belong to environment"
                               - >-
-                                while [[ $content == *$str* ]]; do echo -e "Waiting for Fugue scan to finsh....\n"; content=$(curl -X PATCH "https://api.riskmanager.fugue.co/v0/environments/${Fugueenvironmentid}" -u ${FugueCLIENTID}:${FugueCLIENTSECRET} -d '{"baseline_id": "'$Fugue_scan_id'","scan_interval": "'$Interval'","remediation": false}'); echo -e "\n$content\n"; sleep 5; done
+                                while [[ $content == *$str* ]]; do echo -e "Waiting for Fugue scan to finish....\n"; content=$(curl -X PATCH "https://api.riskmanager.fugue.co/v0/environments/${Fugueenvironmentid}" -u ${FugueCLIENTID}:${FugueCLIENTSECRET} -d '{"baseline_id": "'$Fugue_scan_id'","scan_interval": "'$Interval'","remediation": false}'); echo -e "\n$content\n"; sleep 5; done
                               - echo -e "\nFugue environment re-baselined, no baseline enforcement and drift detection enabled!"
                 InsecureSsl: false
                 Location: https://github.com/NLTGit/automated_infrastructure_compliance_framework
