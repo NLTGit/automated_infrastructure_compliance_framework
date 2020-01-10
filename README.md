@@ -1,5 +1,6 @@
-# Automated Infrastructure Compliance Framework 
-For help, email support@nltgis.com
+<img src="images/NLT_AICFLLogo.jpg">
+
+**For help, email aicf@nltgis.com**
 
 ## What is AICF?
 The Automated Infrastructure Compliance Framework is an open-source integrated pipeline for deploying and monitoring infrastructure.  Specific features include:
@@ -112,5 +113,4 @@ curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.13.
 
 ## Contact  
 New Light Technologies, Inc.   
-Dave Williams - dave.williams.nltgis.com  
 Carl Alleyne - carl.alleyne@nltgis.com  
