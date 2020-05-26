@@ -203,7 +203,8 @@ Resources:
                               - cd $source
                               - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
-                              - terraform init -no-color && terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color > tfplan.json
+                              - terraform init -no-color && terraform destroy -auto-approve -no-color 
+                              - terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color > tfplan.json
                               - opa eval --format pretty --input tfplan.json --data /usr/bin/regula/lib --data /usr/bin/regula/rules/aws --data /usr/bin/regula/examples/aws 'data.fugue.regula.report' | tee evaluate
                               - TERRAFORM_VALID=$(jq -r '.summary.valid' "evaluate")
                               - if [ "$TERRAFORM_VALID" == "true" ]; then echo -e "\nTerraform resources plan PASSES OPA authorization!\n" && exit 0; else echo -e "\n!!! Terraform resources plan FAILS OPA authorization !!!\n" && exit 1; fi
