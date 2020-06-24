@@ -96,8 +96,7 @@ GitHub Actions is essentailly GitHub's implementation of continuous integration 
 
 We've worked around this by specifying the action trigger in the example workflow on a push to a non-default branch such as "deployment". Therefore your "master" brunch won't clutter with commits that are used to trigger actions.
 
-To implement the AICF Action please visint the aicf-action marketplace page at: 
-The readme for the AICF Action is located at: 
+To implement the AICF Action please visint the aicf-action marketplace page at: https://github.com/marketplace/actions/aicf-action 
 
 ## **Some Example CLI Commands:**
 
