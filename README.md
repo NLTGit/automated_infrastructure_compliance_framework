@@ -3,15 +3,21 @@
 **For help, email aicf@nltgis.com**
 
 ## What is AICF?
-The Automated Infrastructure Compliance Framework is an open-source integrated pipeline for deploying and monitoring infrastructure.  Specific features include:
+The Automated Infrastructure Compliance Framework is an open-source integrated pipeline for deploying and monitoring infrastructure. Specific features include:
 * Pre-deployment policy checking using Open Policy Agent
 * Post-deployment AWS/Azure drift detection using Fugue.co
 * Terraform for Infrastructure-as-Code deployments
 
 ## Technical Summary
-AICF is currently built on AWS Codepipeline and AWS Codebuild and integrates Open Policy Agent, Terraform, and Fugue.
+AICF is the confluence of several technologies and tools such as Open Policy Agent, Terraform and Fugue. It can be build upon any CI/CD toolset of one's choosing. Currently, we have examples of AICF that are built on:
 
-## Deployment/installation overview
+    1) AWS Codepipeline and AWS Codebuild
+    2) GitHub Actions
+
+Use of each detailed below.
+
+
+## AWS Codepipeline Deployment/installation overview
 Before deploying by any of the following methods, the values for the following configuration parameters must be gathered:
   
 "ApplicationName" - Any name of your choosing for the AWS codepiplne reference name  
@@ -68,7 +74,7 @@ $ aws cloudformation create-stack --stack-name testStack --template-body file://
 <img src="images/Screen Shot 2019-10-15 at 8.49.26 AM.png">
 
 
-## How to run AICF
+#### How to run AICF
 Once you deplopy the AICF, it is ready to be usedThe first run will initiate itself once the AWS cloudformation stack is created. By default, the AWS pipeline is configured to run manually. In order to run, execute the following steps:
 
 <img src="images/Screen Shot 2019-10-15 at 8.31.10 AM.png">
@@ -84,7 +90,15 @@ Once you deplopy the AICF, it is ready to be usedThe first run will initiate its
 3) Confirm start of pipeline by clicking on "Release"
 
 <img src="images/Screen Shot 2019-10-15 at 8.31.55 AM.png">
- 
+
+## GitHub Actions Deployment/installation overview
+GitHub Actions is essentailly GitHub's implementation of continuous integration (CI) and continuous deployment (CD) tools. They help you automate your software development workflows and are executed directly in the repo of one's choosing. One develops an Action in a public repo and publishes to the GitHub Marketplace. Then, someone creates a workflow yaml file for that action in the top level of their repo. Actions can be triggered pretty much in any number of ways that one can perform git commands on a repo such as push to a branch, commiting to a brach, create a pull request, creating an issue in a repo's project, etc. One glaring feature, not yet available, is the capability to manually trigger an action.
+
+We've worked around this by specifying the action trigger in the example workflow on a push to a non-default branch such as "deployment". Therefore your "master" brunch won't clutter with commits that are used to trigger actions.
+
+To implement the AICF Action please visint the aicf-action marketplace page at: 
+The readme for the AICF Action is located at: 
+
 ## **Some Example CLI Commands:**
 
 _Apply_
@@ -109,7 +123,7 @@ curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.13.
 ## Contributing
 1) Clone repo  
 2) Create new branch, make changes and commit and push to remote i.e. `git push --set-upstream origin new-branch`  
-3) Log into github and create pull request to the master branch
+3) Log into GitHub and create pull request to the master branch
 
 ## Contact  
 New Light Technologies, Inc.   
