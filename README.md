@@ -18,7 +18,7 @@ Use of each detailed below.
 
 
 ## AWS Codepipeline Deployment/installation overview
-Before deploying by any of the following methods, the values for the following configuration parameters must be gathered:
+Before deploying by any of the following methods, the values for the following configuration parameters must be gathered for the pipeline configuration json file. See the sample.aicf-configuration.json file to start:
   
 "ApplicationName" - Any name of your choosing for the AWS codepiplne reference name  
 "ArtifactS3Bucket" - Name of existing AWS S3 bucket for the AWS codepiplne artifact store  
@@ -33,6 +33,8 @@ Before deploying by any of the following methods, the values for the following c
 "Fugueenvironmentid" - Id of Fugue environment  
 "FugueCLIENTID" - Client Id of Fugue username  
 "FugueCLIENTSECRET" - Secret of the Fugue client Id  
+"REGULAVERSION" - Version of Regula project library/rules 
+"OPAVERSION" - Version of Opa binary
   
 **CLI method**  
 In order to deployment AICF via bash CLI environment, one must first have the aws cli binary installed and have properfly configured the ~/.aws/config and ~/.aws/credentials files
