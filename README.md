@@ -33,7 +33,7 @@ Before deploying by any of the following methods, the values for the following c
 "Fugueenvironmentid" - Id of Fugue environment  
 "FugueCLIENTID" - Client Id of Fugue username  
 "FugueCLIENTSECRET" - Secret of the Fugue client Id  
-"REGULAVERSION" - Version of Regula project library/rules 
+"REGULAVERSION" - Version of Regula project library/rules   
 "OPAVERSION" - Version of Opa binary
   
 **CLI method**  
