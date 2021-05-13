@@ -196,7 +196,7 @@ Resources:
                               - cd /tmp && curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TerraformVersion}/terraform_${TerraformVersion}_linux_amd64.zip && echo "${TerraformSha256} terraform.zip" | sha256sum -c --quiet && unzip terraform.zip && mv terraform /usr/bin
                               - # Install OPA bin
                               - curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v${OPAVERSION}/opa_linux_amd64 && chmod +x opa && mv opa /usr/bin
-                              - # Install regula script and libraries.
+                              - # Install regula script and libraries
                               - mkdir -p /usr/bin/regula && curl -L "https://github.com/fugue/regula/archive/v${REGULAVERSION}.tar.gz" | tar -xz --strip-components=1 -C /usr/bin/regula
                           build:
                             commands:
@@ -204,11 +204,10 @@ Resources:
                               - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
                               - terraform init -no-color && terraform destroy -auto-approve -no-color
-                              - # terraform init -no-color && terraform output -json && terraform destroy -auto-approve -no-color
                               - terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color > tfplan.json
-                              - opa eval --format pretty --input tfplan.json --data /usr/bin/regula/lib --data /usr/bin/regula/rules/aws --data /usr/bin/regula/examples/aws/tag_all_resources.rego 'data.fugue.regula.report' | tee evaluate
-                              - TERRAFORM_VALID=$(jq -r '.summary.valid' "evaluate")
-                              - if [ "$TERRAFORM_VALID" == "true" ]; then echo -e "\nTerraform resources plan PASSES OPA authorization!\n" && exit 0; else echo -e "\n!!! Terraform resources plan FAILS OPA authorization !!!\n" && exit 1; fi
+                              - opa eval --format pretty --input tfplan.json --data /usr/bin/regula/lib --data /usr/bin/regula/rules/tf/aws --data /usr/bin/regula/examples/aws/useast1_only.rego --data /usr/bin/regula/examples/aws/tag_all_resources.rego 'data.fugue.regula.report' | tee evaluate
+                              - TERRAFORM_FAILED=$(jq -r '.summary.rule_results.FAIL' "evaluate")
+                              - if (("$TERRAFORM_FAILED" > 0)); then echo -e '\n!!! Terraform resources plan FAILS OPA authorization !!!\n' && exit 1; else echo -e '\nTerraform resources plan PASSES OPA authorization!!\n' && exit 0; fi
                 InsecureSsl: false
                 Type: CODEPIPELINE
                 
