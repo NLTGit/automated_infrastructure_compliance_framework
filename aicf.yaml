@@ -58,6 +58,9 @@ Parameters:
     OPAVERSION:
         Type: String
 
+    Tf_workdir:
+        Type: String
+
 Metadata:
     AWS::CloudFormation::Interface:
         ParameterGroups:
@@ -200,7 +203,7 @@ Resources:
                               - mkdir -p /usr/bin/regula && curl -L "https://github.com/fugue/regula/archive/v${REGULAVERSION}.tar.gz" | tar -xz --strip-components=1 -C /usr/bin/regula
                           build:
                             commands:
-                              - cd $source
+                              - cd $source/${Tf_workdir}
                               - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
                               - terraform init -no-color && terraform destroy -auto-approve -no-color
@@ -243,7 +246,7 @@ Resources:
                               - cd /tmp && curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TerraformVersion}/terraform_${TerraformVersion}_linux_amd64.zip && echo "${TerraformSha256} terraform.zip" | sha256sum -c --quiet && unzip terraform.zip && mv terraform /usr/bin
                           build:
                             commands:
-                              - cd $source
+                              - cd $source/${Tf_workdir}
                               - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
                               - echo -e "\nTurn off Fugue drift detection.\n"
@@ -297,7 +300,7 @@ Resources:
                               - cd /tmp && curl -o /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TerraformVersion}/terraform_${TerraformVersion}_linux_amd64.zip && echo "${TerraformSha256} terraform.zip" | sha256sum -c --quiet && unzip terraform.zip && mv terraform /usr/bin
                           build:
                             commands:
-                              - cd $source
+                              - cd $source/${Tf_workdir}
                               - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
                               - echo -e "\nTurn off Fugue drift detection.\n"

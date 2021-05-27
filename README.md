@@ -18,7 +18,7 @@ Use of each detailed below.
 
 
 ## AWS Codepipeline Deployment/installation overview
-Before deploying by any of the following methods, the values for the following configuration parameters must be gathered for the pipeline configuration json file. See the sample.aicf-configuration.json file to start:
+Before deploying by any of the following methods, one must gather the information for the following configuration parameters for the pipeline configuration json file. See the sample.aicf-configuration.json file to start:
   
 "ApplicationName" - Any name of your choosing for the AWS codepiplne reference name  
 "ArtifactS3Bucket" - Name of existing AWS S3 bucket for the AWS codepiplne artifact store  
@@ -35,6 +35,13 @@ Before deploying by any of the following methods, the values for the following c
 "FugueCLIENTSECRET" - Secret of the Fugue client Id  
 "REGULAVERSION" - Version of Regula project library/rules   
 "OPAVERSION" - Version of Opa binary
+"Tf_workdir" - working directory of terraform files
+
+## Pre-Configured Fugue environment for cloud account
+Before deploying either of the following AICF framework methods, one must create and configure a Fugue environment to obtain the information required in the previous section.
+
+## Terraform Cloud configuration
+Because Terraform doesn't have the current capability to save plans remotely (for conversion to json format for the opa eval execution), one must set the workspace execution to "Local" in the settings.
   
 **CLI method**  
 In order to deployment AICF via bash CLI environment, one must first have the aws cli binary installed and have properfly configured the ~/.aws/config and ~/.aws/credentials files
@@ -65,7 +72,7 @@ $ aws cloudformation create-stack --stack-name testStack --template-body file://
 3) Click on "Create Stack"
 <img src="images/Screen Shot 2019-10-15 at 8.43.36 AM.png">
   
-4) Ensure "Template is Ready" and "Upload a template file" are chosen. Choose the cloudformation template file (OPAFugueCodepipeline.yaml) in this repository
+4) Ensure "Template is Ready" and "Upload a template file" are chosen. Choose the cloudformation template file (aicf.yaml) in this repository
 <img src="images/Screen Shot 2019-10-15 at 8.44.58 AM.png">
   
 5) Fill in the parameters with the information gathered in Deployment/installation overview and click next
