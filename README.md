@@ -16,6 +16,11 @@ AICF is the confluence of several technologies and tools such as Open Policy Age
 
 Use of each detailed below.
 
+## Terraform Cloud configuration
+Because Terraform doesn't have the current capability to save plans remotely (for conversion to json format for the opa eval execution), one must set the workspace execution to "Local" in the settings.
+
+## Pre-Configured Fugue environment for cloud account
+Before deploying either of the following AICF framework methods, one must create and configure a Fugue environment to obtain the information required in the section below.
 
 ## AWS Codepipeline Deployment/installation overview
 Before deploying by any of the following methods, one must gather the information for the following configuration parameters for the pipeline configuration json file. See the sample.aicf-configuration.json file to start:
@@ -36,12 +41,6 @@ Before deploying by any of the following methods, one must gather the informatio
 "REGULAVERSION" - Version of Regula project library/rules   
 "OPAVERSION" - Version of Opa binary
 "Tf_workdir" - working directory of terraform files
-
-## Pre-Configured Fugue environment for cloud account
-Before deploying either of the following AICF framework methods, one must create and configure a Fugue environment to obtain the information required in the previous section.
-
-## Terraform Cloud configuration
-Because Terraform doesn't have the current capability to save plans remotely (for conversion to json format for the opa eval execution), one must set the workspace execution to "Local" in the settings.
   
 **CLI method**  
 In order to deployment AICF via bash CLI environment, one must first have the aws cli binary installed and have properfly configured the ~/.aws/config and ~/.aws/credentials files
