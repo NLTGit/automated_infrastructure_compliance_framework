@@ -210,7 +210,7 @@ Resources:
                               - terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color > tfplan.json
                               - opa eval --format pretty --input tfplan.json --data /usr/bin/regula/lib --data /usr/bin/regula/rules/tf/aws --data /usr/bin/regula/examples/aws/useast1_only.rego --data /usr/bin/regula/examples/aws/tag_all_resources.rego 'data.fugue.regula.report' | tee evaluate
                               - TERRAFORM_FAILED=$(jq -r '.summary.rule_results.FAIL' "evaluate")
-                              - if (("$TERRAFORM_FAILED" > 0)); then echo -e '\n!!! Terraform resources plan FAILS OPA authorization !!!\n' && exit 1; else echo -e '\nTerraform resources plan PASSES OPA authorization!!\n' && exit 0; fi
+                              - if (("$TERRAFORM_FAILED" == 0)); then echo -e '\nTerraform resources plan PASSES OPA authorization!!\n' && exit 0; else echo -e '\n!!! Terraform resources plan FAILS OPA authorization !!!\n' && exit 1; fi
                 InsecureSsl: false
                 Type: CODEPIPELINE
                 
