@@ -206,7 +206,7 @@ Resources:
                               - cd $source/${Tf_workdir}
                               - printf 'credentials "app.terraform.io" {\n    token = "${TerraformCloudToken}"\n}' >> ~/.terraform.rc
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
-                              - terraform init -no-color && terraform destroy -auto-approve -no-color
+                              - terraform init -no-color && terraform plan -refresh-only -no-color 
                               - terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color > tfplan.json
                               - opa eval --format pretty --input tfplan.json --data /usr/bin/regula/lib --data /usr/bin/regula/rules/tf/aws --data /usr/bin/regula/examples/aws/useast1_only.rego --data /usr/bin/regula/examples/aws/tag_all_resources.rego 'data.fugue.regula.report' | tee evaluate
                               - TERRAFORM_FAILED=$(jq -r '.summary.rule_results.FAIL' "evaluate")

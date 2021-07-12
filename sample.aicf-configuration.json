@@ -25,11 +25,11 @@
 	},
 	{
 		"ParameterKey":"TerraformSha256",
-		"ParameterValue":"5ce5834fd74e3368ad7bdaac847f973e66e61acae469ee86b88da4c6d9f933d4"
+		"ParameterValue":"7329f887cc5a5bda4bedaec59c439a4af7ea0465f83e3c1b0f4d04951e1181f4"
 	},
 	{
 		"ParameterKey":"TerraformVersion",
-		"ParameterValue":"0.15.3"
+		"ParameterValue":"1.0.2"
 	},
 	{
 		"ParameterKey":"TerraformCloudToken",
