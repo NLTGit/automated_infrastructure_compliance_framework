@@ -134,4 +134,4 @@ curl -L -o opa https://github.com/open-policy-agent/opa/releases/download/v0.13.
 
 ## Contact  
 New Light Technologies, Inc.   
-Carl Alleyne - carl.alleyne@nltgis.com  
+aicf@nltgis.com  
