@@ -208,7 +208,7 @@ Resources:
                               - export TF_CLI_CONFIG_FILE="/root/.terraform.rc"
                               - terraform init -no-color && terraform plan -refresh-only -no-color
                               - terraform plan --out tfplan.binary -no-color && terraform show -json tfplan.binary -no-color > tfplan.json
-                              - opa eval --format pretty --input tfplan.json --data /usr/bin/regula/rego/lib --data /usr/bin/regula/rego/rules/tf/aws --data /usr/bin/regula/rego/examples/aws/tag_all_resources.rego --data /usr/bin/regula/rego/examples/aws/useast1_only.rego 'data.fugue.regula.report' | tee evaluate
+                              - opa eval --format pretty --input tfplan.json --data /usr/bin/regula/rego/lib --data /usr/bin/regula/rego/rules/tf/aws --data /usr/bin/regula/rego/examples/aws/tag_all_resources.rego --data /usr/bin/regula/rego/examples/aws/useast1_only.rego --data waivers.rego 'data.fugue.regula.report' | tee evaluate
                               - TERRAFORM_FAILED=$(jq -r '.summary.rule_results.FAIL' "evaluate")
                               - if (("$TERRAFORM_FAILED" == 0)); then echo -e '\nTerraform resources plan PASSES OPA authorization!!\n' && exit 0; else echo -e '\n!!! Terraform resources plan FAILS OPA authorization !!!\n' && exit 1; fi
                 InsecureSsl: false
