@@ -25,11 +25,11 @@
 	},
 	{
 		"ParameterKey":"TerraformSha256",
-		"ParameterValue":"a73459d406067ce40a46f026dce610740d368c3b4a3d96591b10c7a577984c2e"
+		"ParameterValue":"3e330ce4c8c0434cdd79fe04ed6f6e28e72db44c47ae50d01c342c8a2b05d331"
 	},
 	{
 		"ParameterKey":"TerraformVersion",
-		"ParameterValue":"1.0.8"
+		"ParameterValue":"1.1.6"
 	},
 	{
 		"ParameterKey":"TerraformCloudToken",
@@ -53,11 +53,11 @@
 	},
 	{
 		"ParameterKey":"REGULAVERSION",
-		"ParameterValue":"2.1.0"
+		"ParameterValue":"2.6.1"
 	},
 	{
 		"ParameterKey":"OPAVERSION",
-		"ParameterValue":"0.28.0"
+		"ParameterValue":"0.37.2"
 	},
 	{
 		"ParameterKey":"Tf_workdir",
